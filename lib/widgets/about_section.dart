@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).largerThan(MOBILE);
+    final isMobile = ResponsiveBreakpoints.of(context).equals(MOBILE);
+
     return Container(
       width: double.infinity,
       color: Colors.white,
@@ -47,21 +51,21 @@ class AboutSection extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppTheme.paddingLarge * 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Wrap(
+                  spacing: AppTheme.paddingLarge,
+                  runSpacing: AppTheme.paddingLarge,
+                  alignment: WrapAlignment.center,
                   children: [
                     _buildStatCard(
                       '1.5M+',
                       'Population Served',
                       'Providing mental health services to Bungoma County',
                     ),
-                    const SizedBox(width: AppTheme.paddingLarge),
                     _buildStatCard(
                       '1st',
                       'Psychiatrist',
                       'Only psychiatrist in Bungoma County',
                     ),
-                    const SizedBox(width: AppTheme.paddingLarge),
                     _buildStatCard(
                       '24/7',
                       'Support',
@@ -77,50 +81,55 @@ class AboutSection extends StatelessWidget {
     );
   }
 
+
+
   Widget _buildStatCard(String number, String title, String description) {
-    return Container(
-      width: 300,
-      padding: const EdgeInsets.all(AppTheme.paddingLarge),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            number,
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Container(
+        width: 300,
+        padding: const EdgeInsets.all(AppTheme.paddingLarge),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 6),
             ),
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: AppColors.text,
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              number,
+              style: const TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              color: AppColors.textLight,
+            const SizedBox(height: AppTheme.paddingSmall),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: AppColors.text,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            const SizedBox(height: AppTheme.paddingSmall),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 14,
+                color: AppColors.textLight,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

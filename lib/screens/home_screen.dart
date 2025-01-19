@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import '../utils/constants.dart';
 import '../utils/animations.dart';
@@ -8,6 +7,7 @@ import '../widgets/responsive_wrapper.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
 import '../widgets/services_section.dart';
+import '../widgets/gallery_section.dart';
 import '../widgets/team_section.dart';
 import '../widgets/events_section.dart';
 import '../widgets/resources_section.dart';
@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _sectionKeys = {
     'about': GlobalKey(),
     'services': GlobalKey(),
+    'gallery': GlobalKey(),
     'team': GlobalKey(),
     'events': GlobalKey(),
     'resources': GlobalKey(),
@@ -82,6 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildNavItem('About', onTap: () => _scrollToSection('about')),
                 _buildNavItem('Services',
                     onTap: () => _scrollToSection('services')),
+                _buildNavItem('Gallery',
+                    onTap: () => _scrollToSection('gallery')),
                 _buildNavItem('Team', onTap: () => _scrollToSection('team')),
                 _buildNavItem('Events',
                     onTap: () => _scrollToSection('events')),
@@ -143,6 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () => _scrollToSection('about')),
                           _buildDrawerItem('Services',
                               onTap: () => _scrollToSection('services')),
+                          _buildDrawerItem('Gallery',
+                              onTap: () => _scrollToSection('gallery')),
                           _buildDrawerItem('Team',
                               onTap: () => _scrollToSection('team')),
                           _buildDrawerItem('Events',
@@ -184,6 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 AboutSection(key: _sectionKeys['about'])
                     .animate(effects: AppAnimations.fadeSlideUp),
                 ServicesSection(key: _sectionKeys['services'])
+                    .animate(effects: AppAnimations.fadeSlideUp),
+                GallerySection(key: _sectionKeys['gallery'])
                     .animate(effects: AppAnimations.fadeSlideUp),
                 TeamSection(key: _sectionKeys['team'])
                     .animate(effects: AppAnimations.fadeSlideUp),
