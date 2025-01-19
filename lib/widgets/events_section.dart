@@ -80,90 +80,74 @@ class EventsSection extends StatelessWidget {
     String imageUrl,
     bool isUpcoming,
   ) {
-    return Container(
-      width: 350,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-            child: Image.asset(
-              imageUrl,
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+    return GradientCard(
+      padding: EdgeInsets.zero,
+      child: SizedBox(
+        width: 350,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.asset(
+                imageUrl,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(AppTheme.paddingLarge),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (isUpcoming)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppTheme.paddingSmall,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: const Text(
-                      'Upcoming',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w500,
+            Padding(
+              padding: const EdgeInsets.all(AppTheme.paddingLarge),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (isUpcoming)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.accent.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'Upcoming',
+                        style: TextStyle(
+                          color: AppColors.accent,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
+                  const SizedBox(height: AppTheme.paddingSmall),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                const SizedBox(height: AppTheme.paddingSmall),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.text,
+                  const SizedBox(height: 4),
+                  Text(
+                    date,
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppTheme.paddingSmall),
-                Text(
-                  date,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w500,
+                  const SizedBox(height: AppTheme.paddingSmall),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: AppColors.textLight,
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppTheme.paddingSmall),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppColors.textLight,
-                    height: 1.5,
-                  ),
-                ),
-                const SizedBox(height: AppTheme.paddingMedium),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Learn More →'),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

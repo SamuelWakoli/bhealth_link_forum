@@ -81,54 +81,41 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-
-
   Widget _buildStatCard(String number, String title, String description) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: Container(
-        width: 300,
+      child: GradientCard(
         padding: const EdgeInsets.all(AppTheme.paddingLarge),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 15,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Text(
-              number,
-              style: const TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+        child: SizedBox(
+          width: 300,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                number,
+                style: const TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ),
-            ),
-            const SizedBox(height: AppTheme.paddingSmall),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: AppColors.text,
+              const SizedBox(height: 8),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: AppTheme.paddingSmall),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.textLight,
+              const SizedBox(height: 8),
+              Text(
+                description,
+                style: TextStyle(
+                  color: AppColors.textLight,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

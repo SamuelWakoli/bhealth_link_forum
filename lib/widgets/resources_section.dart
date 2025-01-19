@@ -82,57 +82,51 @@ class ResourcesSection extends StatelessWidget {
     IconData icon,
     String buttonText,
   ) {
-    return Container(
-      width: 250,
+    return GradientCard(
       padding: const EdgeInsets.all(AppTheme.paddingLarge),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 48,
-            color: AppColors.primary,
-          ),
-          const SizedBox(height: AppTheme.paddingMedium),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.text,
+      gradient: AppColors.accentGradient,
+      child: SizedBox(
+        width: 250,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              size: 40,
+              color: Colors.white,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              color: AppColors.textLight,
-              height: 1.5,
+            const SizedBox(height: AppTheme.paddingMedium),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: AppTheme.paddingMedium),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
+            const SizedBox(height: AppTheme.paddingSmall),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+              ),
             ),
-            child: Text(buttonText),
-          ),
-        ],
+            const SizedBox(height: AppTheme.paddingMedium),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: AppColors.primary,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.paddingLarge,
+                  vertical: AppTheme.paddingMedium,
+                ),
+              ),
+              child: Text(buttonText),
+            ),
+          ],
+        ),
       ),
     );
   }

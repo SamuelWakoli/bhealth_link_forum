@@ -28,9 +28,58 @@ class BHLFApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.light,
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          tertiary: AppColors.accent,
+          surface: AppColors.surface,
+          error: AppColors.error,
         ),
-        textTheme: GoogleFonts.poppinsTextTheme(),
+        textTheme: GoogleFonts.interTextTheme().copyWith(
+          displayLarge: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.bold,
+          ),
+          displayMedium: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.bold,
+          ),
+          displaySmall: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         useMaterial3: true,
+        cardTheme: CardTheme(
+          elevation: 0,
+          surfaceTintColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          clipBehavior: Clip.antiAlias,
+        ),
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+          backgroundColor: AppColors.surface,
+          scrolledUnderElevation: 0.5,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.background,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.primary),
+          ),
+        ),
       ),
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,

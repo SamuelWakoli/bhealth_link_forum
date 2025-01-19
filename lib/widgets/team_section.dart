@@ -76,54 +76,45 @@ class TeamSection extends StatelessWidget {
     String imageUrl,
     String description,
   ) {
-    return Container(
-      width: 300,
+    return GradientCard(
       padding: const EdgeInsets.all(AppTheme.paddingLarge),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 80,
-            backgroundImage: AssetImage(imageUrl),
-          ),
-          const SizedBox(height: AppTheme.paddingMedium),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.text,
+      child: SizedBox(
+        width: 300,
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 60,
+              backgroundImage: AssetImage(imageUrl),
             ),
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            role,
-            style: const TextStyle(
-              fontSize: 16,
-              color: AppColors.primary,
-              fontWeight: FontWeight.w500,
+            const SizedBox(height: AppTheme.paddingLarge),
+            Text(
+              name,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              color: AppColors.textLight,
+            const SizedBox(height: 4),
+            Text(
+              role,
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.primary,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            const SizedBox(height: AppTheme.paddingMedium),
+            Text(
+              description,
+              style: TextStyle(
+                color: AppColors.textLight,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

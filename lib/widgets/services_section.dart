@@ -83,47 +83,38 @@ class ServicesSection extends StatelessWidget {
   }
 
   Widget _buildServiceCard(String title, String description, IconData icon) {
-    return Container(
-      width: 350,
+    return GradientCard(
       padding: const EdgeInsets.all(AppTheme.paddingLarge),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon,
-            size: 40,
-            color: AppColors.primary,
-          ),
-          const SizedBox(height: AppTheme.paddingMedium),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.text,
+      gradient: AppColors.primaryGradient,
+      child: SizedBox(
+        width: 350,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              size: 48,
+              color: Colors.white,
             ),
-          ),
-          const SizedBox(height: AppTheme.paddingSmall),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 16,
-              color: AppColors.textLight,
-              height: 1.5,
+            const SizedBox(height: AppTheme.paddingMedium),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: AppTheme.paddingSmall),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
