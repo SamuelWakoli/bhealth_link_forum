@@ -18,7 +18,20 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Bungoma Health Link Forum - Connecting healthcare professionals and community members for better health outcomes in Bungoma County">
+
+  <!-- Open Graph meta tags for social media previews -->
+  <meta property="og:title" content="Bungoma Health Link Forum">
+  <meta property="og:description" content="Join Bungoma Health Link Forum to connect, collaborate, and improve healthcare delivery in Bungoma County. A platform for healthcare professionals and community engagement.">
+  <meta property="og:image" content="images/preview.png">
+  <meta property="og:url" content="https://bungomahealthlink.org">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bungoma Health Link Forum">
+  <meta name="twitter:description" content="Join Bungoma Health Link Forum to connect, collaborate, and improve healthcare delivery in Bungoma County. A platform for healthcare professionals and community engagement.">
+  <meta name="twitter:image" content="images/preview.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,8 +44,62 @@
 
   <title>bhealth_link_forum</title>
   <link rel="manifest" href="manifest.json">
+  
+  <style>
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #ffffff;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #2196F3;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    .loading-text {
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+      color: #2196F3;
+      font-size: 18px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+  </style>
 </head>
 <body>
+  <div id="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Bungoma Health Link Forum</div>
+  </div>
+  <script>
+    window.addEventListener('load', function() {
+      // Remove the loading screen once Flutter is initialized
+      window.addEventListener('flutter-first-frame', function() {
+        var loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+          loadingElement.remove();
+        }
+      });
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
