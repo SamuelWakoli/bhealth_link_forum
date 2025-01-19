@@ -1,0 +1,1 @@
+{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"hosting":{"source":".","ignore":["firebase.json","**/.*","**/node_modules/**"],"frameworksBackend":{"region":"us-central1"}},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"bhealth-link-forum","configurations":{"web":"1:917586718640:web:e869913a1b6e59b69e3075"}}}}}}
