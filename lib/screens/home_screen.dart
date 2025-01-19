@@ -65,18 +65,34 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollToTop() {
     _scrollController.animateTo(
       0,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeOutCubic,
     );
   }
 
   void _scrollToSection(String section) {
     final key = _sectionKeys[section];
     if (key?.currentContext != null) {
-      Scrollable.ensureVisible(
-        key!.currentContext!,
-        duration: const Duration(milliseconds: 600),
-        curve: Curves.easeInOut,
+      final targetContext = key!.currentContext!;
+      final box = targetContext.findRenderObject() as RenderBox;
+      final offset = box.localToGlobal(Offset.zero).dy;
+
+      // Get the current scroll position to calculate relative offset
+      final scrollPosition = _scrollController.position;
+      final currentOffset = scrollPosition.pixels;
+
+      // Calculate viewport height and target position
+      final viewportHeight = MediaQuery.of(context).size.height;
+      final appBarHeight = AppBar().preferredSize.height;
+
+      // Calculate the target scroll position with padding and viewport adjustments
+      final targetPosition = (offset + currentOffset - appBarHeight - 16)
+          .clamp(0.0, scrollPosition.maxScrollExtent);
+
+      _scrollController.animateTo(
+        targetPosition,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeOutCubic,
       );
     }
   }

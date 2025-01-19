@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import '../utils/constants.dart';
 
 class ContactSection extends StatelessWidget {
@@ -6,6 +7,8 @@ class ContactSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).largerThan(MOBILE);
+
     return Container(
       width: double.infinity,
       color: AppColors.background,
@@ -13,8 +16,9 @@ class ContactSection extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: AppTheme.maxWidth),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppTheme.paddingLarge,
+            padding: EdgeInsets.symmetric(
+              horizontal:
+                  isDesktop ? AppTheme.paddingLarge : AppTheme.paddingMedium,
               vertical: AppTheme.paddingLarge * 2,
             ),
             child: Column(
@@ -37,92 +41,108 @@ class ContactSection extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppTheme.paddingLarge * 2),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildContactInfo(
-                            'Location',
-                            'Bungoma, Western Kenya',
-                            Icons.location_on,
-                          ),
-                          const SizedBox(height: AppTheme.paddingLarge),
-                          _buildContactInfo(
-                            'Email',
-                            'info@bhlfkenya.org',
-                            Icons.email,
-                          ),
-                          const SizedBox(height: AppTheme.paddingLarge),
-                          _buildContactInfo(
-                            'Phone',
-                            '+254 700 000000',
-                            Icons.phone,
-                          ),
-                          const SizedBox(height: AppTheme.paddingLarge),
-                          _buildSocialLinks(),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: AppTheme.paddingLarge * 2),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(AppTheme.paddingLarge),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Send us a message',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.text,
-                              ),
-                            ),
-                            const SizedBox(height: AppTheme.paddingLarge),
-                            _buildTextField('Name'),
-                            const SizedBox(height: AppTheme.paddingMedium),
-                            _buildTextField('Email'),
-                            const SizedBox(height: AppTheme.paddingMedium),
-                            _buildTextField('Subject'),
-                            const SizedBox(height: AppTheme.paddingMedium),
-                            _buildTextField('Message', maxLines: 4),
-                            const SizedBox(height: AppTheme.paddingLarge),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: AppTheme.paddingLarge,
-                                  vertical: AppTheme.paddingMedium,
-                                ),
-                              ),
-                              child: const Text('Send Message'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                if (isDesktop)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: _buildContactInfoSection()),
+                      const SizedBox(width: AppTheme.paddingLarge * 2),
+                      Expanded(child: _buildContactForm()),
+                    ],
+                  )
+                else
+                  Column(
+                    children: [
+                      _buildContactForm(),
+                      const SizedBox(height: AppTheme.paddingLarge * 2),
+                      _buildContactInfoSection(),
+                    ],
+                  ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildContactInfoSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildContactInfo(
+          'Location',
+          'Bungoma, Western Kenya',
+          Icons.location_on,
+        ),
+        const SizedBox(height: AppTheme.paddingLarge),
+        _buildContactInfo(
+          'Email',
+          'info@bhlfkenya.org',
+          Icons.email,
+        ),
+        const SizedBox(height: AppTheme.paddingLarge),
+        _buildContactInfo(
+          'Phone',
+          '+254 700 000000',
+          Icons.phone,
+        ),
+        const SizedBox(height: AppTheme.paddingLarge),
+        _buildSocialLinks(),
+      ],
+    );
+  }
+
+  Widget _buildContactForm() {
+    return Container(
+      padding: const EdgeInsets.all(AppTheme.paddingLarge),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Send us a message',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColors.text,
+            ),
+          ),
+          const SizedBox(height: AppTheme.paddingLarge),
+          _buildTextField('Name'),
+          const SizedBox(height: AppTheme.paddingMedium),
+          _buildTextField('Email'),
+          const SizedBox(height: AppTheme.paddingMedium),
+          _buildTextField('Subject'),
+          const SizedBox(height: AppTheme.paddingMedium),
+          _buildTextField('Message', maxLines: 4),
+          const SizedBox(height: AppTheme.paddingLarge),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.paddingLarge,
+                  vertical: AppTheme.paddingMedium,
+                ),
+              ),
+              child: const Text('Send Message'),
+            ),
+          ),
+        ],
       ),
     );
   }
