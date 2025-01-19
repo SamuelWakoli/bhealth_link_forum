@@ -24,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _scrollController = ScrollController();
+  bool _showBackToTop = false;
   final _sectionKeys = {
     'about': GlobalKey(),
     'services': GlobalKey(),
@@ -37,11 +38,36 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScroll);
     if (widget.initialSection != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToSection(widget.initialSection!);
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final showBackToTop = _scrollController.offset > 200;
+    if (showBackToTop != _showBackToTop) {
+      setState(() {
+        _showBackToTop = showBackToTop;
+      });
+    }
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+    );
   }
 
   void _scrollToSection(String section) {
@@ -154,6 +180,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : null,
+      floatingActionButton: _showBackToTop
+          ? FloatingActionButton(
+              onPressed: _scrollToTop,
+              backgroundColor: AppColors.primary,
+              child: const Icon(Icons.arrow_upward, color: Colors.white),
+            )
+          : null,
       body: ResponsiveLayout(
         child: SingleChildScrollView(
           controller: _scrollController,
@@ -163,7 +196,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Column(
               children: [
-                const HeroSection().animate(effects: AppAnimations.fadeIn),
+                HeroSection(
+                  onLearnMorePressed: () => _scrollToSection('resources'),
+                  onGetSupportPressed: () => _scrollToSection('contact'),
+                ).animate(effects: AppAnimations.fadeIn),
                 AboutSection(key: _sectionKeys['about'])
                     .animate(effects: AppAnimations.fadeSlideUp),
                 ServicesSection(key: _sectionKeys['services'])

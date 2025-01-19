@@ -3,7 +3,13 @@ import '../utils/constants.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HeroSection extends StatelessWidget {
-  const HeroSection({super.key});
+  final VoidCallback? onLearnMorePressed;
+  final VoidCallback? onGetSupportPressed;
+  const HeroSection({
+    super.key,
+    this.onLearnMorePressed,
+    this.onGetSupportPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class HeroSection extends StatelessWidget {
                             Row(
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: onGetSupportPressed,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
                                     foregroundColor: AppColors.primary,
@@ -65,7 +71,7 @@ class HeroSection extends StatelessWidget {
                                 ),
                                 const SizedBox(width: AppTheme.paddingMedium),
                                 OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: onLearnMorePressed,
                                   style: OutlinedButton.styleFrom(
                                     foregroundColor: Colors.white,
                                     side: const BorderSide(color: Colors.white),
@@ -157,7 +163,7 @@ class HeroSection extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: onGetSupportPressed,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               foregroundColor: AppColors.primary,
@@ -170,7 +176,7 @@ class HeroSection extends StatelessWidget {
                           ),
                           const SizedBox(width: AppTheme.paddingMedium),
                           OutlinedButton(
-                            onPressed: () {},
+                            onPressed: onLearnMorePressed,
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.white,
                               side: const BorderSide(color: Colors.white),
